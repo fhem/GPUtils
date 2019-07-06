@@ -116,6 +116,11 @@ sub GP_RedirectMainFn ($$;$$) {
             "ERROR: Main subroutine $func() cannot be redirected"
           . ' because it does not exist';
     }
+    elsif ( !defined( *{$fnew} ) ) {
+        $@ =
+            "ERROR: Main subroutine $func() cannot be redirected"
+          . " because target subroutine $fnew() does not exist";
+    }
     elsif (defined( $main::data{redirectedMainFn} )
         && defined( $main::data{redirectedMainFn}{$func} )
         && $main::data{redirectedMainFn}{$func} ne $fnew )
